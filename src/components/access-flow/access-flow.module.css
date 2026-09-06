@@ -68,7 +68,7 @@
   cursor: pointer;
 }
 
-.navigation button:hover {
+.navigation button:hover:not(:disabled) {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -85,8 +85,16 @@
   color: var(--foreground);
 }
 
-.navigation .next:hover {
+.navigation .next:hover:not(:disabled) {
   border-color: var(--foreground);
+}
+
+.navigation .next:disabled {
+  background: var(--line);
+  color: var(--muted);
+  border-color: var(--muted);
+  border-style: dashed;
+  cursor: not-allowed;
 }
 
 @media (max-width: 640px) {

@@ -7,6 +7,7 @@ type AccessFlowProps = {
   activeStep: AccessStep;
   onBack: () => void;
   onContinue: () => void;
+  continueDisabled?: boolean;
   children: ReactNode;
 };
 
@@ -14,6 +15,7 @@ export function AccessFlow({
   activeStep,
   onBack,
   onContinue,
+  continueDisabled = false,
   children,
 }: AccessFlowProps) {
   const stepIndex = ACCESS_STEPS.findIndex((step) => step.id === activeStep);
@@ -61,7 +63,13 @@ export function AccessFlow({
             <button type="button" className={styles.back} onClick={onBack}>Voltar</button>
           )}
           {stepIndex < ACCESS_STEPS.length - 1 && (
-            <button type="button" className={styles.next} onClick={onContinue}>Continuar</button>
+            <button
+              type="button"
+              className={styles.next}
+              onClick={onContinue}
+              disabled={continueDisabled}
+              aria-describedby={activeStep === "barriers" ? "barriers-instruction" : undefined}
+            >Continuar</button>
           )}
         </nav>
       </main>
