@@ -1,67 +1,56 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+    <div className="home">
+      <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+      <header className="site-header">
+        <Link className="brand" href="/" aria-label="PONTE — início">
+          <svg width="36" height="32" viewBox="0 0 36 32" fill="none" aria-hidden="true">
+            <path d="M4 28V17a14 14 0 0 1 28 0v11M4 18h28" stroke="currentColor" strokeWidth="4" />
+            <path d="M18 18v10" stroke="var(--accent)" strokeWidth="4" />
+          </svg>
+          PONTE
+        </Link>
+        <details className="help">
+          <summary><span className="help-icon" aria-hidden="true">?</span>Ajuda</summary>
+          <div className="help-content">
+            <p className="help-title">Um ponto de partida</p>
+            <p>A PONTE ajuda você a encontrar outras formas de acessar conteúdos digitais, a partir das suas necessidades.</p>
+            <p>Use Tab para navegar e Enter para selecionar “Começar”. Para fechar esta ajuda, selecione “Ajuda” novamente.</p>
+          </div>
+        </details>
+      </header>
+      <main id="conteudo" className="main-content" tabIndex={-1}>
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <p className="eyebrow"><span aria-hidden="true" />Tecnologia adaptativa. Acesso possível.</p>
+            <h1 id="hero-title">A tecnologia pode se adaptar <span>a você.</span></h1>
+            <p className="hero-description">A PONTE ajuda você a encontrar outras formas de acessar conteúdos digitais, a partir do que está difícil para você.</p>
+            <Link className="start-link" href="/acesso" prefetch={false}>
+              Começar
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+          <div className="hero-art" aria-hidden="true">
+            <svg viewBox="0 0 480 500" fill="none" focusable="false">
+              <circle cx="248" cy="250" r="198" stroke="var(--line)" />
+              <circle cx="248" cy="250" r="148" stroke="var(--line)" strokeDasharray="3 7" />
+              <path d="M24 402h432M248 30v438" stroke="var(--line)" />
+              <path d="M104 402V235a144 144 0 0 1 288 0v167h-66V235a78 78 0 0 0-156 0v167z" fill="var(--blue)" />
+              <path d="M104 302h144c54 0 98 44 98 98" stroke="var(--accent)" strokeWidth="28" />
+              <circle cx="104" cy="302" r="10" fill="var(--background)" />
+              <circle cx="346" cy="402" r="10" fill="var(--background)" />
+              <path d="M43 235h16m-8-8v16M420 116h16m-8-8v16" stroke="var(--blue)" strokeWidth="1.5" />
+            </svg>
+            <span className="art-caption">Diferentes caminhos. Novas possibilidades.</span>
+          </div>
+        </section>
+        <div className="home-principle">
+          <span className="principle-label">O nosso ponto de partida</span>
+          <p>A tecnologia deve se adaptar à pessoa.</p>
         </div>
       </main>
     </div>
