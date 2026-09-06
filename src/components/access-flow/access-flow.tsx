@@ -68,7 +68,13 @@ export function AccessFlow({
               className={styles.next}
               onClick={onContinue}
               disabled={continueDisabled}
-              aria-describedby={activeStep === "barriers" ? "barriers-instruction" : undefined}
+              aria-describedby={
+                activeStep === "barriers"
+                  ? "barriers-instruction"
+                  : activeStep === "content-type"
+                    ? "content-type-instruction"
+                    : undefined
+              }
             >Continuar</button>
           )}
         </nav>
