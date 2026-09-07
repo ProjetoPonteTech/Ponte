@@ -1,0 +1,27 @@
+.result { font-size: 18px; line-height: 1.7; }
+.support { margin-top: 24px; max-width: 680px; color: var(--muted); font-size: 20px; }
+.notice { margin-top: 24px; padding-left: 20px; border-left: 3px solid var(--blue); color: var(--muted); font-size: 16px; }
+.section { margin-top: 40px; }
+.result h2 { font-family: var(--font-jakarta), sans-serif; font-size: clamp(22px, 3vw, 28px); font-weight: 600; line-height: 1.35; margin-bottom: 16px; }
+.barriers { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; padding: 0; list-style: none; }
+.barriers li { padding: 8px 16px; border: 1px solid var(--blue); border-radius: 6px; font-size: 16px; }
+.improvements { margin-top: 20px; padding-left: 24px; list-style: disc; }
+.improvements li + li { margin-top: 8px; }
+.document { margin-top: 48px; padding: 32px; border: 1px solid var(--blue); border-radius: 8px; background: #edf1f5; }
+.ready { margin-bottom: 20px; font-size: 16px; font-weight: 700; }
+.documentName { font-size: 20px; font-weight: 600; }
+.actions, .comparison { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+.primary, .secondary { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-height: 56px; padding: 14px 24px; border: 2px solid var(--blue); border-radius: 6px; color: var(--foreground); font-size: 18px; font-weight: 700; line-height: 1.5; text-align: center; text-decoration: none; cursor: pointer; }
+.primary { background: var(--accent); border-color: transparent; }
+.secondary { background: transparent; }
+.primary:hover, .secondary:hover { border-color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+.linkNote { display: block; font-size: 14px; font-weight: 400; line-height: 1.6; }
+.comparison a { min-height: 48px; padding: 8px 0; text-decoration: underline; text-underline-offset: 4px; }
+.comparison { gap: 24px 40px; }
+.restart { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+@media (max-width: 640px) {
+  .support { font-size: 18px; }
+  .document { padding: 24px 20px; }
+  .actions, .comparison { flex-direction: column; }
+  .primary, .secondary { width: 100%; }
+}

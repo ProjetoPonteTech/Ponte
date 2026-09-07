@@ -5,6 +5,7 @@ import { AccessFlow } from "../../components/access-flow/access-flow";
 import { BarriersStep } from "../../components/access-flow/barriers-step";
 import { ContentTypeStep } from "../../components/access-flow/content-type-step";
 import { AnalysisStep } from "../../components/access-flow/analysis-step";
+import { ResultStep } from "../../components/access-flow/result-step";
 import { analyzeContent, type AnalysisResult } from "../../lib/analyze-content";
 import { ContentInputStep } from "../../components/access-flow/content-input/content-input-step";
 import { hasValidContent } from "../../components/access-flow/content-input/validation";
@@ -23,7 +24,6 @@ export default function AccessPage() {
   const [analysisError, setAnalysisError] = useState<string | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const previousStep = useRef(activeStep);
-  const stepIndex = ACCESS_STEPS.findIndex((step) => step.id === activeStep);
   const canContinue = (step: AccessStep) => {
     if (step === "barriers") return selectedBarriers.length > 0;
     if (step === "content-type") return selectedContentType !== null;
@@ -79,6 +79,15 @@ export default function AccessPage() {
     setContent((current) => ({ ...current, [update.contentType]: update.content }));
   }
 
+  function restartFlow() {
+    setSelectedBarriers([]);
+    setSelectedContentType(null);
+    setContent(EMPTY_CONTENT);
+    setAnalysisResult(null);
+    setAnalysisError(null);
+    setActiveStep("barriers");
+  }
+
   return (
     <AccessFlow
       activeStep={activeStep}
@@ -101,7 +110,7 @@ export default function AccessPage() {
               ? "Adicione o conteúdo"
               : activeStep === "analysis"
                 ? "Analisando possíveis barreiras..."
-                : `Etapa: ${ACCESS_STEPS[stepIndex].label}`}
+                : "Seu conteúdo foi adaptado"}
       </h1>
       {activeStep === "barriers" && (
         <BarriersStep selectedBarriers={selectedBarriers} onToggle={toggleBarrier} />
@@ -113,6 +122,9 @@ export default function AccessPage() {
         <ContentInputStep contentType={selectedContentType} content={content} onChange={updateContent} />
       )}
       {activeStep === "analysis" && <AnalysisStep error={analysisError} />}
+      {activeStep === "result" && analysisResult && (
+        <ResultStep result={analysisResult} onRestart={restartFlow} />
+      )}
     </AccessFlow>
   );
 }

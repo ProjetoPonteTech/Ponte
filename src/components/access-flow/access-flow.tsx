@@ -58,7 +58,7 @@ export function AccessFlow({
           {children}
         </section>
 
-        <nav className={styles.navigation} aria-label="Navegação entre etapas">
+        {activeStep !== "result" && <nav className={styles.navigation} aria-label="Navegação entre etapas">
           {stepIndex > 0 && (
             <button type="button" className={styles.back} onClick={onBack}>Voltar</button>
           )}
@@ -79,7 +79,7 @@ export function AccessFlow({
               }
             >Continuar</button>
           )}
-        </nav>
+        </nav>}
       </main>
     </div>
   );
