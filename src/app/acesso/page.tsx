@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { AccessFlow } from "../../components/access-flow/access-flow";
 import { BarriersStep } from "../../components/access-flow/barriers-step";
 import { ContentTypeStep } from "../../components/access-flow/content-type-step";
+import { AnalysisStep } from "../../components/access-flow/analysis-step";
+import { analyzeContent, type AnalysisResult } from "../../lib/analyze-content";
 import { ContentInputStep } from "../../components/access-flow/content-input/content-input-step";
 import { hasValidContent } from "../../components/access-flow/content-input/validation";
 import { EMPTY_CONTENT, type ContentDrafts, type ContentUpdate } from "../../types/access-content";
@@ -17,6 +19,8 @@ export default function AccessPage() {
   const [selectedBarriers, setSelectedBarriers] = useState<BarrierId[]>([]);
   const [selectedContentType, setSelectedContentType] = useState<ContentTypeId | null>(null);
   const [content, setContent] = useState<ContentDrafts>(EMPTY_CONTENT);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [analysisError, setAnalysisError] = useState<string | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const previousStep = useRef(activeStep);
   const stepIndex = ACCESS_STEPS.findIndex((step) => step.id === activeStep);
@@ -24,7 +28,7 @@ export default function AccessPage() {
     if (step === "barriers") return selectedBarriers.length > 0;
     if (step === "content-type") return selectedContentType !== null;
     if (step === "content-input") return hasValidContent(selectedContentType, content);
-    return true;
+    return step === "result" && analysisResult !== null;
   };
 
   useEffect(() => {
@@ -34,7 +38,28 @@ export default function AccessPage() {
     }
   }, [activeStep]);
 
+  useEffect(() => {
+    if (activeStep !== "analysis" || !selectedContentType) return;
+    const controller = new AbortController();
+    analyzeContent({
+      barriers: selectedBarriers,
+      contentType: selectedContentType,
+      content: content[selectedContentType],
+    }, { signal: controller.signal }).then((result) => {
+      if (controller.signal.aborted) return;
+      setAnalysisResult(result);
+      setActiveStep("result");
+    }).catch(() => {
+      if (!controller.signal.aborted) {
+        setAnalysisError("Não foi possível concluir a simulação. Volte e tente novamente.");
+      }
+    });
+    return () => controller.abort();
+  }, [activeStep, selectedBarriers, selectedContentType, content]);
+
   function moveStep(direction: -1 | 1) {
+    setAnalysisError(null);
+    setAnalysisResult(null);
     setActiveStep((current) => {
       if (direction === 1 && !canContinue(current)) {
         return current;
@@ -74,7 +99,9 @@ export default function AccessPage() {
             ? "O que você quer acessar?"
             : activeStep === "content-input"
               ? "Adicione o conteúdo"
-              : `Etapa: ${ACCESS_STEPS[stepIndex].label}`}
+              : activeStep === "analysis"
+                ? "Analisando possíveis barreiras..."
+                : `Etapa: ${ACCESS_STEPS[stepIndex].label}`}
       </h1>
       {activeStep === "barriers" && (
         <BarriersStep selectedBarriers={selectedBarriers} onToggle={toggleBarrier} />
@@ -85,6 +112,7 @@ export default function AccessPage() {
       {activeStep === "content-input" && selectedContentType && (
         <ContentInputStep contentType={selectedContentType} content={content} onChange={updateContent} />
       )}
+      {activeStep === "analysis" && <AnalysisStep error={analysisError} />}
     </AccessFlow>
   );
 }

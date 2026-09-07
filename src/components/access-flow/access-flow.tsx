@@ -62,7 +62,7 @@ export function AccessFlow({
           {stepIndex > 0 && (
             <button type="button" className={styles.back} onClick={onBack}>Voltar</button>
           )}
-          {stepIndex < ACCESS_STEPS.length - 1 && (
+          {stepIndex < ACCESS_STEPS.length - 1 && activeStep !== "analysis" && (
             <button
               type="button"
               className={styles.next}
