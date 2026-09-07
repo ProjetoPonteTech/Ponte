@@ -73,7 +73,9 @@ export function AccessFlow({
                   ? "barriers-instruction"
                   : activeStep === "content-type"
                     ? "content-type-instruction"
-                    : undefined
+                    : activeStep === "content-input"
+                      ? "content-input-instruction"
+                      : undefined
               }
             >Continuar</button>
           )}
