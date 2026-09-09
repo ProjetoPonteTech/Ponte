@@ -1,3 +1,15 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .support { margin-top: 24px; max-width: 660px; color: var(--muted); font-size: 20px; line-height: 1.7; }
 .note { margin-top: 20px; color: var(--muted); font-size: 16px; line-height: 1.6; }
 .phases { margin-block: 40px 32px; padding: 0; list-style: none; }

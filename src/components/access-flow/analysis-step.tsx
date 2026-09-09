@@ -20,6 +20,11 @@ export function AnalysisStep({ error }: { error: string | null }) {
 
   return (
     <>
+      {!error && (
+        <p className={styles.visuallyHidden} role="status">
+          Fase atual: {PHASES[phase]}.
+        </p>
+      )}
       <p className={styles.support}>A PONTE está avaliando o conteúdo e as necessidades que você informou.</p>
       <p className={styles.note}>Análise simulada para demonstração.</p>
       <ol className={styles.phases} aria-label="Progresso da análise simulada">

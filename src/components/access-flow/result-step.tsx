@@ -71,7 +71,7 @@ export function ResultStep({ result, onRestart }: ResultStepProps) {
       {isDocument && (
         <>
           <section className={styles.document} aria-labelledby="documento-adaptado">
-            <p className={styles.ready}>✓ Versão adaptada pronta para visualizar</p>
+            <p className={styles.ready}><span aria-hidden="true">✓</span> Versão adaptada pronta para visualizar</p>
             <h2 id="documento-adaptado">Documento adaptado</h2>
             <p className={styles.documentName}>{DEMO_DOCUMENT.name}</p>
             <p>PDF de demonstração · Versão adaptada</p>

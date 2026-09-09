@@ -37,7 +37,7 @@ export function AccessFlow({
           <div className="help-content">
             <p className="help-title">Como navegar</p>
             <p>Use “Continuar” para avançar e “Voltar” para retornar à etapa anterior.</p>
-            <p>Você também pode usar Tab para navegar e Enter para selecionar. Selecione “Ajuda” novamente para fechar.</p>
+            <p>Use Tab para navegar, Espaço para marcar opções e Enter para ativar botões. No tipo de conteúdo, use as setas para alternar entre opções. Selecione “Ajuda” novamente para fechar.</p>
           </div>
         </details>
       </header>
