@@ -124,7 +124,6 @@ h1 {
   letter-spacing: -0.055em;
   text-wrap: balance;
 }
-h1 span { white-space: nowrap; }
 .hero-description {
   max-width: 470px;
   margin-block: 28px 32px;

@@ -22,13 +22,6 @@ export function BarrierCard({ barrier, selected, onToggle }: BarrierCardProps) {
         onChange={onToggle}
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
-        onKeyDown={(event) => {
-          // Espaço já é suportado pelo checkbox nativo; Enter também seleciona.
-          if (event.key === "Enter") {
-            event.preventDefault();
-            if (!event.repeat) event.currentTarget.click();
-          }
-        }}
       />
       <span className={styles.cardContent}>
         <span id={titleId} className={styles.cardTitle}>{barrier.title}</span>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ContentTypeId } from "../../../data/contentTypes";
 import type { ContentDrafts, ContentUpdate } from "../../../types/access-content";
 import { FileInput } from "./file-input";
@@ -11,6 +12,8 @@ type ContentInputStepProps = {
 };
 
 export function ContentInputStep({ contentType, content, onChange }: ContentInputStepProps) {
+  const [textTouched, setTextTouched] = useState(false);
+
   function renderInput() {
     switch (contentType) {
       case "document":
@@ -19,7 +22,9 @@ export function ContentInputStep({ contentType, content, onChange }: ContentInpu
       case "website":
       case "multimedia":
         return <UrlInput key={contentType} label={contentType === "website" ? "Endereço do site" : "Link do conteúdo multimídia"} value={content[contentType]} onChange={(value) => onChange({ contentType, content: value })} />;
-      case "text":
+      case "text": {
+        const textInvalid = textTouched && content.text.trim().length === 0;
+
         return (
           <div className={styles.field}>
             <label htmlFor="content-text" className={styles.label}>Texto que você quer adaptar</label>
@@ -30,9 +35,20 @@ export function ContentInputStep({ contentType, content, onChange }: ContentInpu
               placeholder="Cole ou escreva aqui o conteúdo que você quer adaptar."
               value={content.text}
               onChange={(event) => onChange({ contentType: "text", content: event.target.value })}
+              onBlur={() => setTextTouched(true)}
+              required
+              aria-invalid={textInvalid}
+              aria-describedby="content-text-hint content-text-error"
             />
+            <p id="content-text-hint" className={styles.hint}>
+              Informe o texto que você quer adaptar. Este campo é obrigatório.
+            </p>
+            <p id="content-text-error" className={styles.error} role="alert">
+              {textInvalid ? "Informe o texto que você quer adaptar." : ""}
+            </p>
           </div>
         );
+      }
     }
   }
 

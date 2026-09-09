@@ -10,7 +10,13 @@ type UrlInputProps = {
 
 export function UrlInput({ label, value, onChange }: UrlInputProps) {
   const [touched, setTouched] = useState(false);
-  const invalid = touched && value.length > 0 && !isValidUrl(value);
+  const empty = touched && value.trim().length === 0;
+  const invalid = touched && !empty && !isValidUrl(value);
+  const errorMessage = empty
+    ? "Informe o endereço completo do conteúdo."
+    : invalid
+      ? "Informe um endereço válido, como https://exemplo.com."
+      : "";
 
   return (
     <div className={styles.field}>
@@ -26,12 +32,13 @@ export function UrlInput({ label, value, onChange }: UrlInputProps) {
         value={value}
         onChange={(event) => onChange(event.target.value)}
         onBlur={() => setTouched(true)}
-        aria-invalid={invalid}
+        required
+        aria-invalid={Boolean(errorMessage)}
         aria-describedby="url-hint url-error"
       />
       <p id="url-hint" className={styles.hint}>Informe o endereço completo, começando com https:// ou http://.</p>
       <p id="url-error" className={styles.error} role="alert">
-        {invalid ? "Informe um endereço válido, como https://exemplo.com." : ""}
+        {errorMessage}
       </p>
     </div>
   );
