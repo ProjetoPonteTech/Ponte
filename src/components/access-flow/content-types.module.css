@@ -41,21 +41,37 @@
   cursor: pointer;
 }
 
-.card[aria-pressed="true"] {
+.card[data-selected="true"] {
   border-color: var(--blue);
   background: #edf1f5;
 }
 
 .card:hover { border-color: var(--blue); }
-.card:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
+.card:has(input:focus-visible) { outline: 3px solid var(--blue); outline-offset: 5px; }
 
-.indicator {
-  display: grid;
-  place-items: center;
+.control {
+  position: relative;
   flex-shrink: 0;
   width: 24px;
   height: 24px;
   margin-top: 3px;
+}
+
+.radio {
+  position: absolute;
+  inset: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.indicator {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
   border: 2px solid var(--blue);
   border-radius: 50%;
 }
@@ -68,7 +84,7 @@
 
 .label { font-size: 20px; font-weight: 700; line-height: 1.5; }
 .selection { margin-top: 16px; font-size: 16px; font-weight: 600; line-height: 1.5; }
-.card[aria-pressed="false"] .selection { visibility: hidden; }
+.card[data-selected="false"] .selection { visibility: hidden; }
 .instruction { margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.6; }
 
 @media (max-width: 640px) {

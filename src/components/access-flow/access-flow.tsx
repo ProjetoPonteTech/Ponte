@@ -37,7 +37,7 @@ export function AccessFlow({
           <div className="help-content">
             <p className="help-title">Como navegar</p>
             <p>Use “Continuar” para avançar e “Voltar” para retornar à etapa anterior.</p>
-            <p>Você também pode usar Tab para navegar e Enter para selecionar. Selecione “Ajuda” novamente para fechar.</p>
+            <p>Use Tab para navegar, Espaço para marcar opções e Enter para ativar botões. No tipo de conteúdo, use as setas para alternar entre opções. Selecione “Ajuda” novamente para fechar.</p>
           </div>
         </details>
       </header>
@@ -58,11 +58,11 @@ export function AccessFlow({
           {children}
         </section>
 
-        <nav className={styles.navigation} aria-label="Navegação entre etapas">
+        {activeStep !== "result" && <nav className={styles.navigation} aria-label="Navegação entre etapas">
           {stepIndex > 0 && (
             <button type="button" className={styles.back} onClick={onBack}>Voltar</button>
           )}
-          {stepIndex < ACCESS_STEPS.length - 1 && (
+          {stepIndex < ACCESS_STEPS.length - 1 && activeStep !== "analysis" && (
             <button
               type="button"
               className={styles.next}
@@ -73,11 +73,13 @@ export function AccessFlow({
                   ? "barriers-instruction"
                   : activeStep === "content-type"
                     ? "content-type-instruction"
-                    : undefined
+                    : activeStep === "content-input"
+                      ? "content-input-instruction"
+                      : undefined
               }
             >Continuar</button>
           )}
-        </nav>
+        </nav>}
       </main>
     </div>
   );

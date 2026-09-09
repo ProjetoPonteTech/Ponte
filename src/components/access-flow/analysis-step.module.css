@@ -1,0 +1,24 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.support { margin-top: 24px; max-width: 660px; color: var(--muted); font-size: 20px; line-height: 1.7; }
+.note { margin-top: 20px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.phases { margin-block: 40px 32px; padding: 0; list-style: none; }
+.phase { display: flex; align-items: center; gap: 20px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+.number { display: grid; place-items: center; flex-shrink: 0; width: 40px; height: 40px; border: 1px solid var(--blue); border-radius: 50%; font-size: 18px; }
+.phase[aria-current="step"] .number { background: var(--blue); color: var(--background); }
+.label { font-size: 18px; font-weight: 700; line-height: 1.6; }
+.status { margin-top: 4px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.spinner { flex-shrink: 0; margin-left: auto; width: 24px; height: 24px; border: 2px solid var(--line); border-top-color: var(--blue); border-radius: 50%; animation: rotate 1.5s linear infinite; }
+@keyframes rotate { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+@media (max-width: 640px) { .support { font-size: 18px; } .phase { gap: 12px; } }
