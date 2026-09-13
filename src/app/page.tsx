@@ -1,14 +1,24 @@
 import Link from "next/link";
 
+function PonteSymbol({ trimOrangeEnd = false }: { trimOrangeEnd?: boolean }) {
+  return (
+    <>
+      <path d="M104 402V235a144 144 0 0 1 288 0v167h-66V235a78 78 0 0 0-156 0v167z" fill="var(--blue)" />
+      <path d="M104 302h144c54 0 98 44 98 98" stroke="var(--accent)" strokeWidth="28" pathLength={trimOrangeEnd ? 1 : undefined} strokeDasharray={trimOrangeEnd ? "0.975 1" : undefined} />
+      <circle cx="104" cy="302" r="10" fill="var(--background)" />
+      <circle cx="346" cy="402" r="10" fill="var(--background)" />
+    </>
+  );
+}
+
 export default function Home() {
   return (
     <div className="home">
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <header className="site-header">
         <Link className="brand" href="/" aria-label="PONTE — início">
-          <svg width="36" height="32" viewBox="0 0 36 32" fill="none" aria-hidden="true">
-            <path d="M4 28V17a14 14 0 0 1 28 0v11M4 18h28" stroke="currentColor" strokeWidth="4" />
-            <path d="M18 18v10" stroke="var(--accent)" strokeWidth="4" />
+          <svg width="36" height="32" viewBox="94 91 298 321" fill="none" aria-hidden="true">
+            <PonteSymbol trimOrangeEnd />
           </svg>
           PONTE
         </Link>
@@ -39,10 +49,7 @@ export default function Home() {
               <circle cx="248" cy="250" r="198" stroke="var(--line)" />
               <circle cx="248" cy="250" r="148" stroke="var(--line)" strokeDasharray="3 7" />
               <path d="M24 402h432M248 30v438" stroke="var(--line)" />
-              <path d="M104 402V235a144 144 0 0 1 288 0v167h-66V235a78 78 0 0 0-156 0v167z" fill="var(--blue)" />
-              <path d="M104 302h144c54 0 98 44 98 98" stroke="var(--accent)" strokeWidth="28" />
-              <circle cx="104" cy="302" r="10" fill="var(--background)" />
-              <circle cx="346" cy="402" r="10" fill="var(--background)" />
+              <PonteSymbol />
               <path d="M43 235h16m-8-8v16M420 116h16m-8-8v16" stroke="var(--blue)" strokeWidth="1.5" />
             </svg>
             <span className="art-caption">Diferentes caminhos. Novas possibilidades.</span>
