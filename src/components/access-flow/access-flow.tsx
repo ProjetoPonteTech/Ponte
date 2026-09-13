@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { PonteLogo } from "../ponte-logo";
 import { ACCESS_STEPS, type AccessStep } from "./steps";
 import styles from "./access-flow.module.css";
 
@@ -25,13 +25,7 @@ export function AccessFlow({
     <div className={`home ${styles.flow}`}>
       <a className="skip-link" href="#conteudo-acesso">Pular para o conteúdo</a>
       <header className="site-header">
-        <Link className="brand" href="/" aria-label="PONTE — início">
-          <svg width="36" height="32" viewBox="0 0 36 32" fill="none" aria-hidden="true">
-            <path d="M4 28V17a14 14 0 0 1 28 0v11M4 18h28" stroke="currentColor" strokeWidth="4" />
-            <path d="M18 18v10" stroke="var(--accent)" strokeWidth="4" />
-          </svg>
-          PONTE
-        </Link>
+        <PonteLogo />
         <details className="help">
           <summary><span className="help-icon" aria-hidden="true">?</span>Ajuda</summary>
           <div className="help-content">
